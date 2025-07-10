@@ -4,6 +4,7 @@ module com.pepe {
     requires javafx.media;
 	requires jakarta.persistence;
 	requires org.hibernate.orm.core;
+	opens com.pepe.EjemplosHibernate.Models to org.hibernate.orm.core;
     opens com.pepe.EjemplosHibernate to javafx.fxml;
     exports com.pepe.EjemplosHibernate;
 }

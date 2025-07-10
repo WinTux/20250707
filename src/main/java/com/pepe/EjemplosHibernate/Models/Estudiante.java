@@ -1,5 +1,6 @@
 package com.pepe.EjemplosHibernate.Models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -19,7 +20,9 @@ public class Estudiante {
 	private String apellido;
 	private Date fechaNacimiento;
 	private Boolean pregrado;
-	private Double promedio;// numeric
+	@Column(precision = 10, scale = 2)
+	private BigDecimal promedio;
+
 	public int getId() {
 		return id;
 	}
@@ -50,10 +53,10 @@ public class Estudiante {
 	public void setPregrado(Boolean pregrado) {
 		this.pregrado = pregrado;
 	}
-	public Double getPromedio() {
+	public BigDecimal getPromedio() {
 		return promedio;
 	}
-	public void setPromedio(Double promedio) {
+	public void setPromedio(BigDecimal promedio) {
 		this.promedio = promedio;
 	}
 	
