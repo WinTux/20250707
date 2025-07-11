@@ -61,7 +61,7 @@ public class EstudianteDAO {
 			// Rescatar al estudiante desde DDBB
 			Estudiante estDDBB = sesion.get(Estudiante.class, id);
 			if(estDDBB != null) {
-				//sesion.delete(estDDBB);
+				sesion.remove(estDDBB);
 			}
 			
 		}catch(Exception e) {
