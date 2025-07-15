@@ -12,7 +12,9 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.pepe.EjemplosHibernate.Models.Estudiante;
+import com.pepe.EjemplosHibernate.Models.EstudianteSimple;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -49,6 +51,9 @@ public class FXMLController implements Initializable {
     private CheckBox chkPregradoMod;
     
     @FXML
+    private CheckBox chkEsPregrado;
+    
+    @FXML
     private void btnClickAction(ActionEvent event) {
     	EstudianteDAO estDAO = new EstudianteDAO();
     	Estudiante est = new Estudiante();
@@ -75,6 +80,7 @@ public class FXMLController implements Initializable {
     
     @FXML
     void OnCargarClic(ActionEvent event) {
+    	tblEstudiantes.getColumns().removeAll(tblEstudiantes.getColumns());
     	TableColumn<Estudiante,Integer> colId = new TableColumn<>("ID");
     	colId.setCellValueFactory(new PropertyValueFactory<>("id"));
     	TableColumn<Estudiante,String> colNombre = new TableColumn<>("NOMBRE");
@@ -93,6 +99,28 @@ public class FXMLController implements Initializable {
         tblEstudiantes.setItems(datos);
         lblOut.setText("Lista cargada");
     }
+    
+    @FXML
+    void OnCargarProyeccionClic(ActionEvent event) {
+    	tblEstudiantes.getColumns().removeAll(tblEstudiantes.getColumns());
+    	TableColumn<Estudiante,String> colNombre = new TableColumn<>("NOMBRE");
+    	colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+    	TableColumn<Estudiante,String> colApellido = new TableColumn<>("APELLIDO");
+    	colApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
+    	tblEstudiantes.getColumns().addAll(colNombre,colApellido);
+    	
+        ObservableList<EstudianteSimple> datosSimples = new EstudianteDAO().obtenerEstudiantesPregrado(chkEsPregrado.isSelected());
+        ObservableList<Estudiante> datos = FXCollections.observableArrayList();
+        for(EstudianteSimple es : datosSimples) {
+        	Estudiante est = new Estudiante();
+        	est.setNombre(es.getNombre());
+        	est.setApellido(es.getApellido());
+        	datos.add(est);
+        }
+        tblEstudiantes.setItems(datos);
+        lblOut.setText("Lista de proyección cargada");
+    }
+    
     @FXML
     void OnBuscarIdClic(ActionEvent event) {
     	Estudiante es = new EstudianteDAO().getEstudianteById(Integer.parseInt(txtIdMod.getText()));

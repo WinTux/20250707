@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.pepe.EjemplosHibernate.Models.Estudiante;
+import com.pepe.EjemplosHibernate.Models.EstudianteSimple;
 import com.pepe.EjemplosHibernate.Util.HibernateUtil;
 
 import javafx.collections.FXCollections;
@@ -88,6 +90,25 @@ public class EstudianteDAO {
 			tx = sesion.beginTransaction();
 			List<Estudiante> listaAux = sesion.createQuery("FROM Estudiante").list();
 			for(Estudiante es : listaAux)
+				lista.add(es);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
+	public static ObservableList<EstudianteSimple> obtenerEstudiantesPregrado(Boolean esPregrado){
+		ObservableList<EstudianteSimple> lista = FXCollections.observableArrayList();
+		Session sesion = HibernateUtil
+				.getSessionfactory().openSession();
+		Transaction tx = null;
+		try {
+			tx = sesion.beginTransaction();
+			Query consulta = sesion.createQuery("SELECT new com.pepe.EjemplosHibernate.Models.EstudianteSimple(E.nombre, E.apellido) FROM Estudiante E WHERE E.pregrado = :esPre");
+			consulta.setParameter("esPre",esPregrado);
+			List<EstudianteSimple> listaAux = consulta.list();
+			for(EstudianteSimple es : listaAux)
 				lista.add(es);
 			
 		}catch(Exception e) {

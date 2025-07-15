@@ -20,6 +20,8 @@
                      <children>
                         <TableView fx:id="tblEstudiantes" layoutX="14.0" layoutY="14.0" prefHeight="216.0" prefWidth="493.0" />
                         <Button layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onAction="#OnCargarClic" text="Cargar" />
+                        <Button layoutX="81.0" layoutY="230.0" mnemonicParsing="false" onAction="#OnCargarProyeccionClic" text="Cargar - proyección" />
+                        <CheckBox fx:id="chkEsPregrado" layoutX="214.0" layoutY="234.0" mnemonicParsing="false" selected="true" text="de pregrado" />
                      </children>
                   </AnchorPane>
               </content>
