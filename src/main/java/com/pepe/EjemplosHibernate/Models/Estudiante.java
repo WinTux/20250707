@@ -1,63 +1,78 @@
 package com.pepe.EjemplosHibernate.Models;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-@Entity
-@Table(name="Estudiante")// schema="pregrado"
-public class Estudiante {
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private int id;
-	@Column(name="nombre", nullable= false)
-	private String nombre;
-	private String apellido;
-	private Date fechaNacimiento;
-	private Boolean pregrado;
-	@Column(precision = 10, scale = 2)
-	private BigDecimal promedio;
+import java.io.Serializable;
+import java.util.Date;
 
-	public int getId() {
-		return id;
+@Entity
+@Table(name="Estudiante", schema="pregrado")
+public class Estudiante implements Serializable {
+	@Id
+	private int Matricula;
+	private String Nombre;
+	private String Apellido;
+	private Date FechaNacimiento;
+	private String Password;
+	private String Email;
+	private Boolean Estado;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="CarreraID")
+	private Carrera carr; // <— sin getter
+	@Column(name="Matricula", nullable = false)
+	public int getMatricula() {
+		return Matricula;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setMatricula(int matricula) {
+		Matricula = matricula;
 	}
+	@Column(name="Nombre", nullable = false, length=100)
 	public String getNombre() {
-		return nombre;
+		return Nombre;
 	}
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		Nombre = nombre;
 	}
+	@Column(name="Apellido", nullable = false, length=100)
 	public String getApellido() {
-		return apellido;
+		return Apellido;
 	}
 	public void setApellido(String apellido) {
-		this.apellido = apellido;
+		Apellido = apellido;
 	}
+	@Column(name="FechaNacimiento", nullable = true)
 	public Date getFechaNacimiento() {
-		return fechaNacimiento;
+		return FechaNacimiento;
 	}
 	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+		FechaNacimiento = fechaNacimiento;
 	}
-	public Boolean getPregrado() {
-		return pregrado;
+	@Column(name="Password", nullable = false)
+	public String getPassword() {
+		return Password;
 	}
-	public void setPregrado(Boolean pregrado) {
-		this.pregrado = pregrado;
+	public void setPassword(String password) {
+		Password = password;
 	}
-	public BigDecimal getPromedio() {
-		return promedio;
+	@Column(name="Email", nullable = false)
+	public String getEmail() {
+		return Email;
 	}
-	public void setPromedio(BigDecimal promedio) {
-		this.promedio = promedio;
+	public void setEmail(String email) {
+		Email = email;
+	}
+	@Column(name="Estado", nullable = false)
+	public Boolean getEstado() {
+		return Estado;
+	}
+	public void setEstado(Boolean estado) {
+		Estado = estado;
 	}
 	
+	public void ponerCarrera(Carrera c) {carr = c;}
 }

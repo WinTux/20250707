@@ -11,6 +11,10 @@
       <property name="connection.password">123456ABCxyz</property>  
       <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
       <property name="hibernate.show_sql">true</property>
-      <mapping class="com.pepe.EjemplosHibernate.Models.Estudiante"/>  
+      <mapping class="com.pepe.EjemplosHibernate.Models.Estudiante"/>
+      <mapping class="com.pepe.EjemplosHibernate.Models.Carrera"></mapping>
+      <mapping class="com.pepe.EjemplosHibernate.Models.Docente"></mapping>
+      <mapping resource="Asignatura.hbm.xml"></mapping>
+      <mapping resource="Inscripcion.hbm.xml"></mapping>  
    </session-factory>  
 </hibernate-configuration>

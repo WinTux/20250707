@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="pregrado">
+	<class name="com.pepe.EjemplosHibernate.Models.Inscripcion" table="Inscripcion">
+		<id name="InscripcionID" type="int" column="InscripcionID">
+			<generator class="identity" />
+		</id>
+		<property name="FechaInscripcion" type="date" column="FechaInscripcion"/>
+		<property name="Calificacion" type="big_decimal" column="Calificacion"    precision="3" scale="2"/>
+		<many-to-one name="asig" class="com.wintux.verify.Model.Asignatura" column="AsignaturaID"  not-found="ignore"/>
+		<many-to-one name="est" class="com.wintux.verify.Model.Estudiante" column="EstudianteID"  not-found="ignore"/>
+	</class>
+</hibernate-mapping>

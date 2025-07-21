@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping schema="pregrado">
+	<class name="com.pepe.EjemplosHibernate.Models.Asignatura" table="Asignatura">
+		<id name="Sigla" type="string" column="Sigla" length="6">
+		</id>
+		<property name="Titulo" type="string" column="Titulo" not-null="true" length="100"/>
+		<property name="Descripcion" type="text" column="Descripcion"/>
+		<property name="Creditos" type="int" column="Creditos"/>
+		<many-to-one name="carrerita" class="com.wintux.verify.Model.Carrera" column="CarreraID" />
+		<set name="Inscripciones" cascade="all-delete-orphan" table=“Inscripcion”>
+			<key column="AsignaturaID" />
+			<one-to-many class="com.wintux.verify.Model.Inscripcion"/>
+		</set>
+	</class>
+</hibernate-mapping>
