@@ -47,13 +47,13 @@ public class EstudianteDAO {
 			tx = sesion.beginTransaction();
 			
 			// Rescatar al estudiante desde DDBB
-			Estudiante estDDBB = sesion.get(Estudiante.class, est.getId());
+			Estudiante estDDBB = sesion.get(Estudiante.class, est.getMatricula());
 			if(estDDBB != null) {
 				estDDBB.setNombre(est.getNombre());
 				estDDBB.setApellido(est.getApellido());
 				estDDBB.setFechaNacimiento(est.getFechaNacimiento());
-				estDDBB.setPregrado(est.getPregrado());
-				estDDBB.setPromedio(est.getPromedio());
+				estDDBB.setEmail(est.getEmail());
+				estDDBB.setEstado(est.getEstado());
 				//sesion.update(estDDBB);
 				sesion.persist(estDDBB);
 				tx.commit();

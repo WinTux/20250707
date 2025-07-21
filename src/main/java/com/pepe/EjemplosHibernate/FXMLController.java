@@ -60,7 +60,7 @@ public class FXMLController implements Initializable {
     	est.setNombre("Juan");
     	est.setApellido("Fernandez");
     	est.setFechaNacimiento(new Date());
-    	est.setPregrado(false);
+    	//est.setPregrado(false);
     	estDAO.crearEstudiante(est);
     	
         lblOut.setText("Registrado");
@@ -124,15 +124,15 @@ public class FXMLController implements Initializable {
     @FXML
     void OnBuscarIdClic(ActionEvent event) {
     	Estudiante es = new EstudianteDAO().getEstudianteById(Integer.parseInt(txtIdMod.getText()));
-    	if(es.getId() > 0) {
+    	if(es.getMatricula() > 0) {
     		// Sí es válido
     		txtNomMod.setText(es.getNombre());
     		txtApeMod.setText(es.getApellido());
     		pickFechaNacMod.setValue(es.getFechaNacimiento().toInstant()
     			      .atZone(ZoneId.systemDefault())
     			      .toLocalDate());
-    		chkPregradoMod.setSelected(es.getPregrado());
-    		txtProdMod.setText(es.getPromedio() != null? es.getPromedio().toString() : "");
+    		//chkPregradoMod.setSelected(es.getPregrado());
+    		//txtProdMod.setText(es.getPromedio() != null? es.getPromedio().toString() : "");
     	}else {
     		// No es válido
     		lblOut.setText("Registro no encontrado");
@@ -141,12 +141,12 @@ public class FXMLController implements Initializable {
     @FXML
     void OnModificarClic(ActionEvent event) {
     	Estudiante estNuevo = new Estudiante();
-    	estNuevo.setId(Integer.parseInt(txtIdMod.getText()));
+    	estNuevo.setMatricula(Integer.parseInt(txtIdMod.getText()));
     	estNuevo.setNombre(txtNomMod.getText());
     	estNuevo.setApellido(txtApeMod.getText());
     	estNuevo.setFechaNacimiento(java.util.Date.from(pickFechaNacMod.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-    	estNuevo.setPregrado(chkPregradoMod.isSelected());
-    	estNuevo.setPromedio(BigDecimal.valueOf(Double.parseDouble(txtProdMod.getText())));
+    	//estNuevo.setPregrado(chkPregradoMod.isSelected());
+    	//estNuevo.setPromedio(BigDecimal.valueOf(Double.parseDouble(txtProdMod.getText())));
     	new EstudianteDAO().editarEstudiante(estNuevo);
     	lblOut.setText("Estudiante modificado ;D");
     }
